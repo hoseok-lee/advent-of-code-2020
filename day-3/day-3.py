@@ -14,7 +14,7 @@ map_latitudes = list(f.read().split("\n"))
 
 
 '''
-    PART 1: PROCESS INPUTS
+    PART 1: WALK ONE SLOPE
 
     Complexity: O(n)
 
@@ -42,7 +42,7 @@ print(trees_encountered)
 
 
 '''
-    PART 2: PROCESS INPUTS
+    PART 2: WALK FIVE SLOPES
 
     Complexity: O(n)
 '''
