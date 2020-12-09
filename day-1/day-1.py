@@ -17,6 +17,8 @@ numbers = sorted(numbers)
 
 '''
     PART ONE: PERFORM TWO-SUM
+
+    Complexity: O(n)
 '''
 '''
 left = 0
@@ -40,6 +42,8 @@ while left < right:
 
 '''
     PART TWO: PERFORM SIMPLE THREE-SUM
+
+    Complexity: O(n^2)
 
     After doing some light research, it seems that any further optimizations of the three-sum algorithm
     require a lot more work for very little performance gain. 

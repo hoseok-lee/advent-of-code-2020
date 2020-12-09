@@ -10,6 +10,8 @@ password_templates = list(f.read().split("\n"))
 
 '''
     PART 1: OLD POLICY
+
+    Complexity: O(m * n)
 '''
 '''
 valid_passwords = 0
@@ -36,6 +38,8 @@ print(valid_passwords)
 
 '''
     PART 2: NEW POLICY
+
+    Complexity: O(n)
 '''
 
 valid_passwords = 0
