@@ -18,8 +18,10 @@ map_latitudes = list(f.read().split("\n"))
 
     Complexity: O(n)
 
-    This algorithm essentially iterates through each latitude of the map and observes a specific x-position, thus requiring exactly O(n) iterations.
-    The illusion of the extension of the map can be solved by using modulus on the x-position after incrementing.
+    This algorithm essentially iterates through each latitude of the map and 
+    observes a specific x-position, thus requiring exactly O(n) iterations.
+    The illusion of the extension of the map can be solved by using modulus on 
+    the x-position after incrementing.
 '''
 '''
 trees_encountered = 0

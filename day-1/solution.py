@@ -35,7 +35,7 @@ while left < right:
     elif current_sum < __GOAL__:
         left += 1
     else:
-        print(numbers[left], numbers[right], numbers[left] * numbers[right])
+        print(numbers[left] * numbers[right])
         break
 '''
 
@@ -45,15 +45,15 @@ while left < right:
 
     Complexity: O(n^2)
 
-    After doing some light research, it seems that any further optimizations of the three-sum algorithm
-    require a lot more work for very little performance gain. 
+    After doing some light research, it seems that any further optimizations of 
+    the three-sum algorithmrequire a lot more work for little performance gain. 
 '''
 
 left = 0
 
 while left < (len(numbers) - 2):
     # Start from the left since it will only increase
-    # No need to check any number less than left since we can assume it has been checked
+    # No need to check any number less than left
     middle = left
     right = len(numbers) - 1
 
@@ -68,7 +68,7 @@ while left < (len(numbers) - 2):
         elif current_sum < __GOAL__:
             middle += 1
         else:
-            print(numbers[left], numbers[middle], numbers[right], numbers[left] * numbers[middle] * numbers[right])
+            print(numbers[left] * numbers[middle] * numbers[right])
             break
 
     left += 1

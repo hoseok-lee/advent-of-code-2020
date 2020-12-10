@@ -13,7 +13,8 @@ passports = [sorted(x.replace("\n", " ").split()) for x in list(f.read().split("
 
     Complexity: O(n^2)
 
-    For this part, the algorithm only needs to count the number of fields and consider CID as optional.
+    For this part, the algorithm only needs to count the number of fields and 
+    consider CID as optional.
 '''
 '''
 valid_passports = 0
@@ -21,9 +22,11 @@ valid_passports = 0
 for passport in passports:
     # Cover the three possible cases of valid passports
     # 1. Has eight fields (automatically valid)
-    # 2. Has seven fields, but doesn't have BYR (in which CID will be the first field)
-    # 3. Has seven fields, but has BYR (in which CID will be the second field)
-    if (len(passport) == 8) or ((len(passport) == 7) and ("cid" not in passport[0]) and ("cid" not in passport[1])):
+    # 2. Has seven fields, but doesn't have BYR (CID will be the first field)
+    # 3. Has seven fields, but has BYR (CID will be the second field)
+    if (len(passport) == 8) or ((len(passport) == 7) and \
+        ("cid" not in passport[0]) and \
+        ("cid" not in passport[1])):
         valid_passports += 1
 
 print(valid_passports)
@@ -35,8 +38,9 @@ print(valid_passports)
 
     Complexity: O(n^3)
 
-    For this part, the algorithm not only needs to perform part 1, but must also validate the value at each field.
-    The algorithm uses a set of predefined validators and calls them from a dictionary.
+    For this part, the algorithm not only needs to perform part 1, but must 
+    also validate the value at each field. The algorithm uses a set of 
+    predefined validators and calls them from a dictionary.
 '''
 
 def validate_byr (byr):
@@ -60,7 +64,9 @@ def validate_hcl (hcl):
 
         # Adds up all the valid characters in the hair colour
         # If the total sum is 6, then all characters are valid
-        return (sum([1 if ((48 <= ord(letter) <= 57) or (97 <= ord(letter) <= 102)) else 0 for letter in hcl]) == 6)
+        return (sum([1 if ((48 <= ord(letter) <= 57) \
+                        or (97 <= ord(letter) <= 102)) \
+                        else 0 for letter in hcl]) == 6)
 
     return False
 
@@ -72,7 +78,8 @@ def validate_hgt (hgt):
         return False
 
     # Check valid range dependent on the measurement type
-    return ((150 <= height <= 193) if measurement_type == "cm" else (59 <= height <= 76) if measurement_type == "in" else False)
+    return ((150 <= height <= 193) if measurement_type == "cm" \
+        else (59 <= height <= 76) if measurement_type == "in" else False)
 
 def validate_iyr (iyr):
     try:
@@ -100,9 +107,11 @@ valid_passports = 0
 for passport in passports:
     # Cover the three possible cases of valid passports
     # 1. Has eight fields (automatically valid)
-    # 2. Has seven fields, but doesn't have BYR (in which CID will be the first field)
-    # 3. Has seven fields, but has BYR (in which CID will be the second field)
-    if (len(passport) == 8) or ((len(passport) == 7) and ("cid" not in passport[0]) and ("cid" not in passport[1])):
+    # 2. Has seven fields, but doesn't have BYR (CID will be the first field)
+    # 3. Has seven fields, but has BYR (CID will be the second field)
+    if (len(passport) == 8) or ((len(passport) == 7) and \
+        ("cid" not in passport[0]) and \
+        ("cid" not in passport[1])):
         valid_current = True
         
         # Check each field

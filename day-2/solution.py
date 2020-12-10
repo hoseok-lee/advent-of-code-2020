@@ -54,7 +54,8 @@ for password_template in password_templates:
     policy_one, policy_two = [int(x) for x in policy.split("-")]
 
     # Determine validity
-    # This is the easiest method I could think of that requires a low (and consistent) amount of comparisons
+    # This is the easiest method I could think of that requires a low (and 
+    # consistent) amount of comparisons
     flag = 0
     
     if password[policy_one - 1] == letter:

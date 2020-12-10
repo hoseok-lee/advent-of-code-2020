@@ -13,8 +13,10 @@ boarding_passes = [x for x in list(f.read().split("\n"))]
 
     Complexity: O(n)
 
-    This problem can be solved very easily by noticing that the boarding pass is a binary representation of the row and column numbers.
-    All the algorithm has to do is replace F, B, L, and R with binary numbers and convert to decimal.
+    This problem can be solved very easily by noticing that the boarding pass 
+    is a binary representation of the row and column numbers. All the algorithm 
+    has to do is replace F, B, L, and R with binary numbers and convert to 
+    decimal.
 '''
 '''
 seat_IDs = []
@@ -38,7 +40,8 @@ print(max(seat_IDs))
 
     Complexity: O(n)
 
-    This problem can also be solved pretty quickly by sorting the seat ID's and looking for the missing value.
+    This problem can also be solved pretty quickly by sorting the seat ID's and 
+    looking for the missing value.
 '''
 
 seat_IDs = []
