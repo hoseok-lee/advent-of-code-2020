@@ -1,7 +1,7 @@
 from collections import deque
 
 # The length of the preamble
-__PREAMBLE_LENGTH__ = 5
+__PREAMBLE_LENGTH__ = 25
 
 # The amount of new numbers that must be generated at each pass
 __GENERATION_LENGTH__ = __PREAMBLE_LENGTH__ - 1
@@ -68,6 +68,8 @@ def clear_first_section (input_list):
         input_list[0] = 0
         input_list.rotate(-1)
 
+
+
 # A list of every possible number the next number in the sequence can take
 # A deque is used to allow easy rotation in the clear_first_section() function
 possible_numbers = deque([0] * (__GENERATION_LENGTH__ ** 2))
@@ -117,7 +119,7 @@ while cursor < len(numbers):
 
     cursor += 1
 
-print(sequence_breaker)
+#print(sequence_breaker)
 
 
 
