@@ -17,6 +17,8 @@ instructions = [[x.split()[0], int(x.split()[1])] \
 '''
     PART 1: EXECUTE PROGRAM
 
+    Complexity: O(n)
+
     This algorithm executes the instructions while also detecting for an
     infinite loop.
 '''
@@ -57,6 +59,8 @@ def execute (instructions):
 
 '''
     PART 2: MANIPULATE PROGRAM
+
+    Complexity: O(n^2)
 
     This algorithm flips "jmp" with "nop" and vice versa until the program
     executes until the end.
