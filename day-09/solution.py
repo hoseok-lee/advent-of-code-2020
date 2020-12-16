@@ -10,7 +10,6 @@ __GENERATION_LENGTH__ = __PREAMBLE_LENGTH__ - 1
 
 '''
     PROCESS INPUTS
-
 '''
 
 # Open and parse input text

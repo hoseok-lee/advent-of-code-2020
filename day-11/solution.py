@@ -6,7 +6,6 @@ from copy import deepcopy
 
 '''
     PROCESS INPUTS
-
 '''
 
 # Open and parse input text
@@ -44,30 +43,32 @@ while True:
     # Iterate through seat map
     for y, row in enumerate(seat_map):
         for x, cell in enumerate(row):
+            # Skip floor tiles
+            if cell == ".":
+                continue
+
             # Gather bounds
             x0, y0 = max(0, (x - 1)), max(0, (y - 1))
             x1, y1 = min(width, (x + 2)), min(height, (y + 2))
 
             # Count neighbours
             # (I(D) + I(A)) - (I(B) + I(C))
-            adjacent_occupied = (I[y1][x1] + I[y0][x0]) - \
-                                (I[y0][x1] + I[y1][x0])
+            adjacency = (I[y1][x1] + I[y0][x0]) - \
+                        (I[y0][x1] + I[y1][x0])
 
             # Account for current seat
             if occupancy_map[y][x] == 1:
-                adjacent_occupied -= 1
+                adjacency -= 1
 
-            # Only perform operations on valid seats
-            if cell == "L":
-                # No seats nearby
-                if adjacent_occupied == 0:
-                    occupancy_map[y][x] = 1
-                    curr_changes += 1
+            # No seats nearby
+            if adjacency == 0:
+                occupancy_map[y][x] = 1
+                curr_changes += 1
 
-                # More than 4 seats nearby
-                if adjacent_occupied >= 4:
-                    occupancy_map[y][x] = 0
-                    curr_changes += 1
+            # More than 4 seats nearby
+            if adjacency >= 4:
+                occupancy_map[y][x] = 0
+                curr_changes += 1
 
     # Exit when you detect no change
     if prev_changes == curr_changes:
@@ -88,19 +89,24 @@ print(np.sum(occupancy_map))
     for this part. This algorithm brute-force seeks the adjacency.
 '''
 
-# Gather seat map size
-height, width = seat_map.shape
-
-# Generate occupancy map
-curr_seat_map = deepcopy(seat_map)
-prev_seat_map = None
-
+# Calculates whether the given position is out of bounds within the shape
 def out_of_bounds (shape, position):
     height, width = shape
     x, y = position
 
     return not ((0 <= x < width) and (0 <= y < height))
 
+
+
+# Gather seat map size
+height, width = seat_map.shape
+
+# Generate occupancy map
+# The current and previous seat map from the iterations
+curr_seat_map = deepcopy(seat_map)
+prev_seat_map = None
+
+# Loop until the previous and current seat maps are the same
 while not np.array_equal(prev_seat_map, curr_seat_map):
     # Copy over current seat map
     prev_seat_map = deepcopy(curr_seat_map)

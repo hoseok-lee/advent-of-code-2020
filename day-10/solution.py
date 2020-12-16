@@ -4,7 +4,6 @@ import numpy as np
 
 '''
     PROCESS INPUTS
-
 '''
 
 # Open and parse input text

@@ -4,7 +4,6 @@ from copy import deepcopy
 
 '''
     PROCESS INPUTS
-
 '''
 
 # Open and parse input text
