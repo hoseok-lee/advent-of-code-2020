@@ -8,10 +8,10 @@ import numpy as np
 
 # Open and parse input text
 f = open("directions.txt", "r")
-directions = [ \
-    [x[0], int(x[1:])] \
+directions = [
+    [x[0], int(x[1:])]
         
-    for x in list(f.read().split("\n")) \
+    for x in list(f.read().split("\n"))
 ]
 
 
@@ -50,7 +50,7 @@ current_position = np.array([0, 0])
 for dir_type, dir_value in directions:
     # Travel forward
     if dir_type == "F":
-        current_position = np.add(current_position, \
+        current_position = np.add(current_position,
             cardinal_directions[current_direction[0]] * dir_value)
 
     # Turn left or right
@@ -60,7 +60,7 @@ for dir_type, dir_value in directions:
             
     # Translation in cardinal direction
     else:
-        current_position = np.add(current_position, \
+        current_position = np.add(current_position,
             cardinal_directions[dir_type] * dir_value)
 
 print(np.sum(np.abs(current_position)))
@@ -82,9 +82,10 @@ print(np.sum(np.abs(current_position)))
 
 # Generate rotational matrix based on its angle and direction
 def rotational_matrix (angle):
-    return np.array( \
-        [[int(np.cos(angle)), -int(np.sin(angle))], \
-        [int(np.sin(angle)), int(np.cos(angle))]])
+    return np.array([
+        [int(np.cos(angle)), -int(np.sin(angle))],
+        [int(np.sin(angle)), int(np.cos(angle))]
+    ])
 
 
 

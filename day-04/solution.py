@@ -4,10 +4,10 @@
 
 # Open and parse input text
 f = open("passports.txt", "r")
-passports = [ \
-    sorted(x.replace("\n", " ").split()) \
+passports = [
+    sorted(x.replace("\n", " ").split())
 
-    for x in list(f.read().split("\n\n")) \
+    for x in list(f.read().split("\n\n"))
 ]
 
 
@@ -28,8 +28,8 @@ for passport in passports:
     # 1. Has eight fields (automatically valid)
     # 2. Has seven fields, but doesn't have BYR (CID will be the first field)
     # 3. Has seven fields, but has BYR (CID will be the second field)
-    if (len(passport) == 8) or ((len(passport) == 7) and \
-        ("cid" not in passport[0]) and \
+    if (len(passport) == 8) or ((len(passport) == 7) and
+        ("cid" not in passport[0]) and
         ("cid" not in passport[1])):
         valid_passports += 1
 
@@ -68,9 +68,10 @@ def validate_hcl (hcl):
 
         # Adds up all the valid characters in the hair colour
         # If the total sum is 6, then all characters are valid
-        return (sum([1 if ((48 <= ord(letter) <= 57) \
-                        or (97 <= ord(letter) <= 102)) \
-                        else 0 for letter in hcl]) == 6)
+        return (sum([
+            1 if ((48 <= ord(letter) <= 57) or (97 <= ord(letter) <= 102))
+            else 0 for letter in hcl
+        ]) == 6)
 
     return False
 
@@ -82,7 +83,7 @@ def validate_hgt (hgt):
         return False
 
     # Check valid range dependent on the measurement type
-    return ((150 <= height <= 193) if measurement_type == "cm" \
+    return ((150 <= height <= 193) if measurement_type == "cm"
         else (59 <= height <= 76) if measurement_type == "in" else False)
 
 def validate_iyr (iyr):
@@ -113,8 +114,8 @@ for passport in passports:
     # 1. Has eight fields (automatically valid)
     # 2. Has seven fields, but doesn't have BYR (CID will be the first field)
     # 3. Has seven fields, but has BYR (CID will be the second field)
-    if (len(passport) == 8) or ((len(passport) == 7) and \
-        ("cid" not in passport[0]) and \
+    if (len(passport) == 8) or ((len(passport) == 7) and
+        ("cid" not in passport[0]) and
         ("cid" not in passport[1])):
         valid_current = True
         

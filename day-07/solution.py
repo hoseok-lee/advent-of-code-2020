@@ -11,10 +11,10 @@ import numpy as np
 
 # Open and parse input text
 f = open("bags.txt", "r")
-raw_information = [ \
-    x \
+raw_information = [
+    x
     
-    for x in list(f.read().split("\n")) \
+    for x in list(f.read().split("\n"))
 ]
 
 # Contains information about which bags contain which

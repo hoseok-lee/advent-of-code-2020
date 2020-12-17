@@ -10,10 +10,10 @@ from copy import deepcopy
 
 # Open and parse input text
 f = open("seats.txt", "r")
-seat_map = np.array([ \
-    [y for y in x] \
+seat_map = np.array([
+    [y for y in x]
         
-    for x in list(f.read().split("\n")) \
+    for x in list(f.read().split("\n"))
 ])
 
 
@@ -56,8 +56,8 @@ while True:
 
             # Count neighbours
             # (I(D) + I(A)) - (I(B) + I(C))
-            adjacency = (I[y1][x1] + I[y0][x0]) - \
-                        (I[y0][x1] + I[y1][x0])
+            adjacency = \
+                (I[y1][x1] + I[y0][x0]) - (I[y0][x1] + I[y1][x0])
 
             # Account for current seat
             if occupancy_map[y][x] == 1:

@@ -8,10 +8,10 @@ from copy import deepcopy
 
 # Open and parse input text
 f = open("instructions.txt", "r")
-instructions = [ \
-    [x.split()[0], int(x.split()[1])] \
+instructions = [
+    [x.split()[0], int(x.split()[1])]
 
-    for x in list(f.read().split("\n")) \
+    for x in list(f.read().split("\n"))
 ]
 
 

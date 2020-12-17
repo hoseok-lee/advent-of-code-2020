@@ -8,10 +8,10 @@ __GOAL__ = 2020
 
 # Open and parse input text
 f = open("numbers.txt", "r")
-numbers = [ \
-    int(x) \
+numbers = [
+    int(x)
     
-    for x in list(f.read().split("\n")) \
+    for x in list(f.read().split("\n"))
 ]
 
 # Sort

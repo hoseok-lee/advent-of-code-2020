@@ -13,18 +13,18 @@ raw_file = f.read().split("\n")
 # Split text into time and bus schedule
 current_time = int(raw_file[0])
 true_bus_times = [
-    int(x)  \
+    int(x) 
 
-    for x in (raw_file[1].replace("x", "0")).split(",") \
+    for x in (raw_file[1].replace("x", "0")).split(",")
 ]
 
 # Remove all "x" bus times
 # Only necessary for part 1
-stripped_bus_times = [ \
-    bus_time \
+stripped_bus_times = [
+    bus_time
     
-    for bus_time in true_bus_times \
-    if bus_time != 0 \
+    for bus_time in true_bus_times
+    if bus_time != 0
 ]
 
 
@@ -40,8 +40,11 @@ stripped_bus_times = [ \
 '''
 '''
 # Calculate the fastest bus
-fastest_bus = min([[bus_time - (current_time % bus_time), bus_time] \
-                    for bus_time in stripped_bus_times])
+fastest_bus = min([
+    [bus_time - (current_time % bus_time), bus_time]
+                    
+    for bus_time in stripped_bus_times
+])
 
 print(fastest_bus[0] * fastest_bus[1])
 '''
@@ -69,16 +72,16 @@ print(fastest_bus[0] * fastest_bus[1])
 co_prime_product = reduce(lambda x, y: x * y, stripped_bus_times)
 
 # Bus times with their proposed remainders
-remainder_bus_times = [ \
-    [(bus_time - bus_index), bus_time] \
+remainder_bus_times = [
+    [(bus_time - bus_index), bus_time]
 
-    for bus_index, bus_time in enumerate(true_bus_times) if bus_time != 0 \
+    for bus_index, bus_time in enumerate(true_bus_times) if bus_time != 0
 ]
 
 # Calculate using Chinese remainder theorem
-print(sum([ \
-    remainder * int(co_prime_product / modulus) * \
+print(sum([
+    remainder * int(co_prime_product / modulus) *
         pow(int(co_prime_product / modulus), -1, modulus)
 
-    for remainder, modulus in remainder_bus_times \
+    for remainder, modulus in remainder_bus_times
 ]) % co_prime_product)
