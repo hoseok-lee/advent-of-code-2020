@@ -28,7 +28,7 @@ next_number = None
 # Turn of the numbers
 turn_numbers = {}
 
-# Iterate through the turns from 1 to 2020
+# Iterate through the turns from 1 to a specific turn number
 for turn_number in range(1, (30000000 + 1)):
     # At the start, pop all the numbers from the starting numbers
     # This will overwrite the new number that was generated from last pass
