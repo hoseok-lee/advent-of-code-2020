@@ -8,7 +8,11 @@ import numpy as np
 
 # Open and parse input text
 f = open("directions.txt", "r")
-directions = [[x[0], int(x[1:])] for x in list(f.read().split("\n"))]
+directions = [ \
+    [x[0], int(x[1:])] \
+        
+    for x in list(f.read().split("\n")) \
+]
 
 
 
@@ -78,8 +82,9 @@ print(np.sum(np.abs(current_position)))
 
 # Generate rotational matrix based on its angle and direction
 def rotational_matrix (angle):
-    return np.array([[int(np.cos(angle)), -int(np.sin(angle))], \
-                    [int(np.sin(angle)), int(np.cos(angle))]])
+    return np.array( \
+        [[int(np.cos(angle)), -int(np.sin(angle))], \
+        [int(np.sin(angle)), int(np.cos(angle))]])
 
 
 
@@ -92,7 +97,7 @@ cardinal_directions = {
     "N": np.array([0, 1])
 }
 
-# Current position of waypoint
+# Current waypoint position
 # E/W and then N/S
 waypoint = np.array([10, 1])
 

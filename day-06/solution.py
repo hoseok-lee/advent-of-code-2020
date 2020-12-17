@@ -4,7 +4,11 @@
 
 # Open and parse input text
 f = open("answers.txt", "r")
-answers_grouped = [x.split("\n") for x in list(f.read().split("\n\n"))]
+answers_grouped = [ \
+    x.split("\n") \
+        
+    for x in list(f.read().split("\n\n")) \
+]
 
 
 

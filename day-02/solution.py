@@ -51,7 +51,11 @@ for password_template in password_templates:
     letter = letter[:-1]
 
     # Determine first and second position of letter occurence
-    policy_one, policy_two = [int(x) for x in policy.split("-")]
+    policy_one, policy_two = [ \
+        int(x) \
+            
+        for x in policy.split("-") \
+    ]
 
     # Determine validity
     # This is the easiest method I could think of that requires a low (and 

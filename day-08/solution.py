@@ -8,8 +8,11 @@ from copy import deepcopy
 
 # Open and parse input text
 f = open("instructions.txt", "r")
-instructions = [[x.split()[0], int(x.split()[1])] \
-                for x in list(f.read().split("\n"))]
+instructions = [ \
+    [x.split()[0], int(x.split()[1])] \
+
+    for x in list(f.read().split("\n")) \
+]
 
 
 
@@ -24,7 +27,7 @@ instructions = [[x.split()[0], int(x.split()[1])] \
 
 def execute (instructions):
     # Copy instruction set
-    test_instr = copy.deepcopy(instructions)
+    test_instr = deepcopy(instructions)
 
     # Current program pointer
     cursor = 0

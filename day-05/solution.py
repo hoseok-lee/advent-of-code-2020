@@ -4,7 +4,11 @@
 
 # Open and parse input text
 f = open("boarding-passes.txt", "r")
-boarding_passes = [x for x in list(f.read().split("\n"))]
+boarding_passes = [ \
+    x \
+        
+    for x in list(f.read().split("\n")) \
+]
 
 
 

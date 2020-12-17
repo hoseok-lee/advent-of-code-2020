@@ -4,8 +4,11 @@
 
 # Open and parse input text
 f = open("passports.txt", "r")
-passports = [sorted(x.replace("\n", " ").split()) \
-            for x in list(f.read().split("\n\n"))]
+passports = [ \
+    sorted(x.replace("\n", " ").split()) \
+
+    for x in list(f.read().split("\n\n")) \
+]
 
 
 

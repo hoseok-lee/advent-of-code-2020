@@ -14,7 +14,11 @@ __GENERATION_LENGTH__ = __PREAMBLE_LENGTH__ - 1
 
 # Open and parse input text
 f = open("xmas.txt", "r")
-numbers = [int(x) for x in list(f.read().split("\n"))]
+numbers = [ \
+    int(x) \
+    
+    for x in list(f.read().split("\n")) \
+]
 
 
 
@@ -78,7 +82,7 @@ for i in range(0, __PREAMBLE_LENGTH__):
     # Iterate foward, generating every possible sum
     for j in range(i + 1, __PREAMBLE_LENGTH__):
         possible_numbers[(i * __GENERATION_LENGTH__) + \
-                        (__GENERATION_LENGTH__ - j)] = (numbers[i] + numbers[j])
+            (__GENERATION_LENGTH__ - j)] = (numbers[i] + numbers[j])
 
 # Move cursor to the first number after the preamble
 cursor = __PREAMBLE_LENGTH__
@@ -113,8 +117,8 @@ while cursor < len(numbers):
         relative_position = (i - (cursor - __GENERATION_LENGTH__))
         # Iterate foward
         possible_numbers[(relative_position * __GENERATION_LENGTH__) + \
-                        (__GENERATION_LENGTH__ - relative_position - 1)] \
-                        = (numbers[i] + numbers[cursor])
+            (__GENERATION_LENGTH__ - relative_position - 1)] \
+            = (numbers[i] + numbers[cursor])
 
     cursor += 1
 

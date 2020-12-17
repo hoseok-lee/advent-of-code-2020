@@ -1,4 +1,5 @@
 import numpy as np
+from functools import cache
 
 
 
@@ -41,6 +42,8 @@ differences[0] = voltages[0]
 '''
 
 # Calculates the n-th tribonacci number
+# functools.cache helps memoize cached tribonacci values
+@cache
 def tribonacci(n):
     initial_trib = [0, 0, 1]
 
