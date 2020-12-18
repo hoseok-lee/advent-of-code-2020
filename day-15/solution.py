@@ -3,12 +3,11 @@
 '''
 
 # Open and parse input text
-f = open("starting-numbers.txt", "r")
-starting_numbers = [
-    int(number)
-    
-    for number in f.read().split(",")
-]
+with open("starting-numbers.txt", "r") as f:
+    raw_lines = f.read()
+
+# Convert to list of integers
+starting_numbers = list(map(int, raw_lines.split(",")))
 
 
 
