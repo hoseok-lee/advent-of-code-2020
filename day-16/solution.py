@@ -48,9 +48,8 @@ nearby_tickets = [
 
     Complexity: O(n * m)
 
-    The algorithm first combines all the invalid fields together to make the
-    validity check faster. It then combines all the nearby ticket fields into
-    one list, since the field nor the ticket number matters.
+    The algorithm combines all the invalid fields together to make the validity
+    check simpler. The efficiency should not change; it's done in brute force.
 '''
 
 # Parse intervals into one list
@@ -147,7 +146,7 @@ while idx < len(nearby_tickets):
     # Iterate
     idx += 1
 
-print(total_sum)
+#print(total_sum)
 
 
 
