@@ -14,8 +14,10 @@ password_templates = list(f.read().split("\n"))
     Complexity: O(n^2)
 '''
 '''
+# Total number of valid passwords
 valid_passwords = 0
 
+# Iterate through the password templates
 for password_template in password_templates:
     policy, letter, password = password_template.split(" ")
 
@@ -42,9 +44,12 @@ print(valid_passwords)
     Complexity: O(n)
 '''
 
+# Total number of valid passwords
 valid_passwords = 0
 
+# Iterate through the password templates
 for password_template in password_templates:
+    # Parse the password template
     policy, letter, password = password_template.split(" ")
 
     # Strip the ":" from the letter

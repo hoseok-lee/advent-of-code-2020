@@ -75,7 +75,7 @@ co_prime_product = reduce(lambda x, y: x * y, stripped_bus_times)
 remainder_bus_times = [
     [(bus_time - bus_index), bus_time]
 
-    for bus_index, bus_time in enumerate(true_bus_times) if bus_time != 0
+    for (bus_index, bus_time) in enumerate(true_bus_times) if bus_time != 0
 ]
 
 # Calculate using Chinese remainder theorem
@@ -83,5 +83,5 @@ print(sum([
     remainder * int(co_prime_product / modulus) *
         pow(int(co_prime_product / modulus), -1, modulus)
 
-    for remainder, modulus in remainder_bus_times
+    for (remainder, modulus) in remainder_bus_times
 ]) % co_prime_product)

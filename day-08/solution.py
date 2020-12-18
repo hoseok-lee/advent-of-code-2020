@@ -42,13 +42,16 @@ def execute (instructions):
         # Perform jump
         if instr_type == "jmp":
             cursor += instr_val
+
         # Accumulate
         elif instr_type == "acc":
             accumulator += instr_val
             cursor += 1
+
         # No operation
         elif instr_type == "nop":
             cursor += 1
+            
         # Already executed instruction at current pointer
         elif instr_type == "end":
             break
@@ -75,7 +78,7 @@ def flip (instr_type):
 
 
 # Run through instructions and test each flip change
-for cursor, instruction in enumerate(instructions):
+for (cursor, instruction) in enumerate(instructions):
     instr_type, instr_val = instruction
 
     if instr_type != "acc":
@@ -89,6 +92,8 @@ for cursor, instruction in enumerate(instructions):
         if finished is not True:
             # Flip back
             instructions[cursor][0] = instr_type
+
+        # Otherwise, end algorithm
         else:
             print(accumulator)
             break

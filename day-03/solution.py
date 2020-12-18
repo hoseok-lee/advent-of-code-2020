@@ -24,18 +24,24 @@ map_latitudes = list(f.read().split("\n"))
     the x-position after incrementing.
 '''
 '''
+# Number of trees encountered
 trees_encountered = 0
 
+# Current location on the map
 map_longitude = 0
 map_latitude = 0
 
+# Map size
 map_width = len(map_latitudes[0])
 map_height = len(map_latitudes)
 
+# Iterate through the map
 while map_latitude < map_height:
+    # Hit a tree
     if map_latitudes[map_latitude][map_longitude] == "#":
         trees_encountered += 1
 
+    # Incremement with wrap-around modulus
     map_longitude = (map_longitude + __X_INCREMENT__) % map_width
     map_latitude += __Y_INCREMENT__
 
@@ -49,6 +55,7 @@ print(trees_encountered)
     Complexity: O(n)
 '''
 
+# All the possible slopes the sled can take
 slope_queue = [
     (1, 1), 
     (3, 1), 
@@ -57,26 +64,36 @@ slope_queue = [
     (1, 2)
 ]
 
+# The final answer asks for the total product
+# Initially set it to 0, and multiply-equals each pass
 total_product = 1
 
 for slope in slope_queue:
+    # Overwrite the slopes
     __X_INCREMENT__, __Y_INCREMENT__ = slope
 
+    # Perform part 1 algorithm with the new slope
     trees_encountered = 0
 
+    # Current location on the map
     map_longitude = 0
     map_latitude = 0
 
+    # Map size
     map_width = len(map_latitudes[0])
     map_height = len(map_latitudes)
 
+    # Iterate through the map
     while map_latitude < map_height:
+        # Hit a tree
         if map_latitudes[map_latitude][map_longitude] == "#":
             trees_encountered += 1
 
+        # Incremement with wrap-around modulus
         map_longitude = (map_longitude + __X_INCREMENT__) % map_width
         map_latitude += __Y_INCREMENT__
 
+    # Contribute to final product
     total_product *= trees_encountered
 
 print(total_product)

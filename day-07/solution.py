@@ -142,7 +142,7 @@ while (previous_incoming != 0) or (previous_outgoing != 0):
     # Incoming paths (column vector)
     adjacent_column = temp_matrix[:,source_node]
 
-    for adjacent_bag, adjacency in enumerate(adjacent_column):
+    for (adjacent_bag, adjacency) in enumerate(adjacent_column):
         # Check for adjacency
         if adjacency != 0:
             current_incoming += 1
@@ -159,7 +159,7 @@ while (previous_incoming != 0) or (previous_outgoing != 0):
     # Outgoing paths (row vector)
     adjacent_row = temp_matrix[source_node,:]
 
-    for adjacent_bag, adjacency in enumerate(adjacent_row):
+    for (adjacent_bag, adjacency) in enumerate(adjacent_row):
         # Since the adjacency measures how many paths lead from the shiny gold 
         # bag to the adjacent bag, add it to the total outgoing paths from the 
         # shiny gold bag

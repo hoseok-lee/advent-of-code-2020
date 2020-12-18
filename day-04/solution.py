@@ -70,7 +70,9 @@ def validate_hcl (hcl):
         # If the total sum is 6, then all characters are valid
         return (sum([
             1 if ((48 <= ord(letter) <= 57) or (97 <= ord(letter) <= 102))
-            else 0 for letter in hcl
+            else 0 
+            
+            for letter in hcl
         ]) == 6)
 
     return False
@@ -83,8 +85,11 @@ def validate_hgt (hgt):
         return False
 
     # Check valid range dependent on the measurement type
-    return ((150 <= height <= 193) if measurement_type == "cm"
-        else (59 <= height <= 76) if measurement_type == "in" else False)
+    return (
+        (150 <= height <= 193) if measurement_type == "cm"
+        else (59 <= height <= 76) if measurement_type == "in" 
+        else False
+    )
 
 def validate_iyr (iyr):
     try:
@@ -93,7 +98,12 @@ def validate_iyr (iyr):
         return False
 
 def validate_pid (pid):
-    return (sum([1 if (48 <= ord(letter) <= 57) else 0 for letter in pid]) == 9)
+    return (sum([
+        1 if (48 <= ord(letter) <= 57) 
+        else 0 
+        
+        for letter in pid
+    ]) == 9)
     
 # Dictionary of validation functions
 validators = {

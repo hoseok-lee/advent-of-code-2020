@@ -71,7 +71,7 @@ for general_mask, memory in programs:
     memory_bank.update({
         mem_addr: (AND_mask & mem_val) | OR_mask
 
-        for mem_addr, mem_val in memory
+        for (mem_addr, mem_val) in memory
     })
 
 print(sum(memory_bank.values()))
@@ -123,7 +123,7 @@ def sum_combinations (possible_bits):
 
 
 # Iterate through the programs
-for general_mask, memory in programs:
+for (general_mask, memory) in programs:
     # Retrieve an index of all the floating bits
     floating_bits = [
         2 ** (len(general_mask) - (result.start() + 1))
@@ -133,7 +133,7 @@ for general_mask, memory in programs:
 
     # Iterate through the memory
     # Each memory generates a certain list of possible addresses
-    for mem_addr, mem_val in memory:
+    for (mem_addr, mem_val) in memory:
         # Calculate base memory address
         base_addr = int(general_mask.replace("X", "1"), 2) | mem_addr
 

@@ -44,8 +44,8 @@ while True:
         occupancy_map.cumsum(axis=0).cumsum(axis=1)
 
     # Iterate through seat map
-    for y, row in enumerate(seat_map):
-        for x, cell in enumerate(row):
+    for (y, row) in enumerate(seat_map):
+        for (x, cell) in enumerate(row):
             # Skip floor tiles
             if cell == ".":
                 continue
@@ -115,8 +115,8 @@ while not np.array_equal(prev_seat_map, curr_seat_map):
     prev_seat_map = deepcopy(curr_seat_map)
     
     # Iterate through seat map
-    for y, row in enumerate(seat_map):
-        for x, cell in enumerate(row):
+    for (y, row) in enumerate(seat_map):
+        for (x, cell) in enumerate(row):
             # Skip floor tiles
             if cell == ".":
                 continue
@@ -125,7 +125,7 @@ while not np.array_equal(prev_seat_map, curr_seat_map):
             adjacency = 0
 
             # Only perform operations on valid seats
-            for dx, dy in itertools.product([-1, 0, 1], repeat=2):
+            for (dx, dy) in itertools.product([-1, 0, 1], repeat=2):
                 # Skip no direciton
                 if (dx, dy) == (0, 0):
                     continue

@@ -61,7 +61,7 @@ for boarding_pass in boarding_passes:
     seat_IDs.append(row * 8 + column)
 
 # Sort seat ID's
-seat_IDs = sorted(seat_IDs)
+seat_IDs.sort()
 
 # initial previous seat ID
 previous_seat_ID = seat_IDs[0] - 1

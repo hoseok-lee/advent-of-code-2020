@@ -107,7 +107,7 @@ waypoint = np.array([10, 1])
 current_position = np.array([0, 0])
 
 # Iterate through the directions
-for dir_type, dir_value in directions:
+for (dir_type, dir_value) in directions:
     # Travel forward
     if dir_type == "F":
         current_position = np.add(current_position, waypoint * dir_value)

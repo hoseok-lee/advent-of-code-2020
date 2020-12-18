@@ -9,7 +9,13 @@ from functools import cache
 
 # Open and parse input text
 f = open("voltages.txt", "r")
-voltages = sorted([int(x) for x in list(f.read().split("\n"))])
+voltages = sorted([
+    int(x) 
+    
+    for x in list(f.read().split("\n"))
+])
+
+# Add the first and last voltages of 0 and +3
 voltages = np.array([0] + voltages + [(voltages[-1] + 3)])
 
 
@@ -63,7 +69,7 @@ total_count = 1
 last_three_diff = 0
 
 # Ignore first difference
-for i, difference in enumerate(differences[1:]):
+for (i, difference) in enumerate(differences[1:]):
     if (difference == 3):
         # Measure the length of the sub-sequence of 1's
         sub_length = i - last_three_diff

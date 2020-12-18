@@ -22,7 +22,11 @@ answers_grouped = [
 '''
 '''
 # Force the strings into a set to ignore duplicates, and then find the length
-total_count = sum([len(set("".join(group))) for group in answers_grouped])
+total_count = sum([
+    len(set("".join(group))) 
+    
+    for group in answers_grouped
+])
 
 print(total_count)
 '''
