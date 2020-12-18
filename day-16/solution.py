@@ -9,36 +9,33 @@ from functools import reduce
 '''
 
 # Open and parse input text
-f = open("notes.txt", "r")
-sections = [
-    section
-    
-    for section in f.read().split("\n\n")
-]
+with open("notes.txt", "r") as f:
+    raw_lines = f.read()
 
 # Categories
-categories = [
-    re.split(r"(.*): (.*) or (.*)", category)[1:-1]
+fields = [
+    [
+        name, 
+        [int(x0), int(y0)],
+        [int(x1), int(y1)]
+    ]
 
-    for category in sections[0].split("\n")
+    for (name, x0, y0, x1, y1) in re.findall(
+        r"((?:\w+ ?)+): (\d+)-(\d+) or (\d+)-(\d+)",
+        raw_lines
+    )
 ]
 
 # Your ticket
-your_ticket = [
-    int(field)
-
-    for field in (sections[1].split("\n")[1]).split(",")
-]
-
 # Nearby tickets
-nearby_tickets = [
-    [
-        int(field)
+your_ticket, *nearby_tickets = [
+    list(map(int, ticket.split(",")))
 
-        for field in nearby_ticket.split(",")
-    ]
-
-    for nearby_ticket in sections[2].split("\n")[1:]
+    for ticket in re.findall(
+        r"^((?:\d+,?)+)$",
+        raw_lines,
+        flags=re.MULTILINE
+    )
 ]
 
 
@@ -47,107 +44,29 @@ nearby_tickets = [
     PART 1: DETERMINE INVALID FIELDS
 
     Complexity: O(n * m)
-
-    The algorithm combines all the invalid fields together to make the validity
-    check simpler. The efficiency should not change; it's done in brute force.
 '''
 
-# Parse intervals into one list
-raw_intervals = list(np.array([
-    [
-        field_interval
-        
-        for field_interval in category[1:]
-    ]
+# Check whether current field is invalid against any of the fields
+def field_invalid (field_value):
+    return not any([
+        (x0 <= field_value <= y0) or
+        (x1 <= field_value <= y1)
 
-    for category in categories
-]).flat)
-
-# Now that the fields have been merged into one list, parse each individual one
-# This just converts string to integer, each interval as a subarray 
-field_intervals = sorted([
-    [
-        int(value)
-        
-        for value in field_interval.split("-")
-    ]
-
-    for field_interval in raw_intervals
-])
-
-# The final list of merged intervals
-merged_intervals = []
-
-# Record the end of the previous interval to compare with
-# Assumes that field_intervals is non-empty
-last_end = -1
-
-# Keep manual index counter to account for deletion
-idx = 0
-
-# Merge as many intervals as possible
-for (start, end) in field_intervals:
-    # There are two possible overlaps that will involve merging:
-    #   1. The previous interval partially overlaps with the current interval
-    #   2. The previous interval completely overlaps the current interval
-    # When the algorithm merges, the last interval will be update and the
-    # current interval will be removed
-
-    # Note that the algorithm will also merge if the last interval ends when
-    # the next interval starts
-    if start <= last_end:
-        # 1. Partial overlap
-        if end > last_end:
-            merged_intervals[-1][1] = end
-
-        # 2. Complete overlap
-        else:
-            # When the last interval completely overlaps the current one, no new
-            # intervals are needed to be created; just delete the current one
-            # (the one that is overlapped)
-            pass
-
-    # Otherwise, just push to the final interval array
-    else:
-        merged_intervals.append([start, end])
-
-    # Pass on the start and end intervals for the future pass and iterate
-    last_end = end
+        for field in fields
+        for (name, (x0, y0), (x1, y1)) in fields
+    ])
 
 
-# Validate each field with these new merged intervals
-# Add to total sum
-total_sum = 0
+'''
+# Print the sum of all invalid numbers
+print(sum([
+    ticket_field
 
-while idx < len(nearby_tickets):
-    # Iterate through all the merged intervals and fields to record any fields
-    # that are invalid
-    invalid_fields = [
-        field
-        
-        for field in nearby_tickets[idx]
-        if not ([
-            True
-            
-            for (start, end) in merged_intervals
-            if start <= field <= end
-        ])
-    ]
-
-    # If there are invalid fields found
-    if invalid_fields:
-        # Add to total sum
-        total_sum += sum(invalid_fields)
-
-        # Delete the ticket for part 2
-        del nearby_tickets[idx]
-        idx -= 1
-
-    # Iterate
-    idx += 1
-
-#print(total_sum)
-
+    for ticket in nearby_tickets
+    for ticket_field in ticket
+    if field_invalid(ticket_field)
+]))
+'''
 
 
 '''
@@ -157,88 +76,57 @@ while idx < len(nearby_tickets):
     correct information. The actual algorithm is not too complicated.
 '''
 
-# Arrange the nearby tickets by field instead of tickets
-nearby_tickets_by_field = np.array(nearby_tickets).transpose().tolist()
+# Generate list of valid tickets
+valid_tickets = [
+    ticket 
 
-# Parse categories to generate invalid interval
-raw_intervals = [
-    [
-        field_interval
-        
-        for field_interval in category[1:]
-    ]
+    for ticket in nearby_tickets
+    if not any([
+        field_invalid(ticket_field)
 
-    for category in categories
-]
-
-# Parse the raw interval strings to retrieve the two valid intervals
-# Merge them into one single list, as the algorithm will unpack it properly
-valid_intervals = [
-    list(np.array([
-        [int(x) for x in interval.split("-")]
-        
-        for interval in field_interval
-    ]).flat)
-
-    for field_interval in raw_intervals
-]
-
-# Dictionary that relates the index of the field by the name of the field
-name_to_idx = {}
-
-# A sorted list to keep track of how many and which each field is invalid for
-invalid_matches = []
-
-for (idx, ticket_field) in enumerate(nearby_tickets_by_field):
-    # Generate a True/False list of whether the current ticket field in question
-    # is valid or invalid for the i-th field
-    invalid_match = [
-        any([
-            True
-
-            for value in ticket_field
-            if (not ((x0 <= value <= y0) or (x1 <= value <= y1)))
-        ])
-    
-        for (x0, y0, x1, y1) in valid_intervals
-    ]
-
-    # Append to the sorted list
-    # The number of invalid matches will be first in order to sort of increasing
-    # invalid matches
-    invalid_matches.append([
-        invalid_match.count(False),
-        idx,
-        invalid_match
+        for ticket_field in ticket
     ])
-
-invalid_matches.sort()
-
-# Iterate through in increasing number of invalid matches
-# The algorithm assumes that every unknown ticket field has multiple matching 
-# names fields, and is organized such that no two fields have the same amount of
-# matching name fields, since that would cause ambiguity in the solution
-for (number, unknown_idx, invalid_match) in invalid_matches:
-    for (name_field_idx, invalid) in enumerate(invalid_match):
-        if not invalid:
-            # First come first serve
-            if name_field_idx not in name_to_idx:
-                name_to_idx[name_field_idx] = unknown_idx
-                break
-
-# Generate a list of category field names
-category_names = [
-    category[0]
-
-    for category in categories
 ]
 
-# Look for category field names including the word "departure" and multiply
-# to the total product
+# Total product for final answer
 total_product = 1
-print(reduce(lambda x, y: x * y, [
-    your_ticket[name_to_idx[idx]]
 
-    for (idx, category_name) in enumerate(category_names)
-    if "departure" in category_name
-]))
+# List of currently available fields
+available_indices = set(range(len(fields)))
+
+# Iterate through all the possible fields
+# This is to de-populate all the available indices, to indicate that we have
+# found a solution for every field 
+for _ in range(len(fields)):
+    # Test each field against a certain column of values in the tickets
+    for (idx, (name, (x0, y0), (x1, y1))) in enumerate(fields):
+        # Find all the possible ticket fields that matches the current field
+        all_possible_fields = [
+            field_index
+
+            for field_index in available_indices
+            if all([
+                (x0 <= ticket[field_index] <= y0) or
+                (x1 <= ticket[field_index] <= y1)
+
+                for ticket in valid_tickets
+            ])
+        ]
+
+        # If only one match could be found, then it's the guaranteed solution
+        if len(all_possible_fields) == 1:
+            # Remove it from the available list of indices
+            # all_possible_fields[0] is the index listed in the ticket list
+            available_indices.remove(all_possible_fields[0])
+
+            # Remove the determined field from the list of fields
+            # Small optimization
+            fields = fields[:idx] + fields[(idx + 1):]
+
+            # Check if name starts with "departure"
+            if name.startswith("departure"):
+                total_product *= your_ticket[all_possible_fields[0]]
+
+            break
+            
+print(total_product)
