@@ -126,5 +126,5 @@ for _ in range(len(fields)):
                 total_product *= your_ticket[all_possible_fields[0]]
 
             break
-            
+
 print(total_product)
