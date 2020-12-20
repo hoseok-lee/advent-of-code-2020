@@ -3,11 +3,14 @@
 '''
 
 # Open and parse input text
-f = open("answers.txt", "r")
+with open("answers.txt", "r") as f:
+    raw_lines = f.read()
+
+# Split the file twice, once by double new-line and once by new-line
 answers_grouped = [
     x.split("\n")
         
-    for x in list(f.read().split("\n\n"))
+    for x in raw_lines.split("\n\n")
 ]
 
 
