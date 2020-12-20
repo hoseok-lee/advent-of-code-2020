@@ -16,6 +16,7 @@ __GENERATION_LENGTH__ = __PREAMBLE_LENGTH__ - 1
 with open("xmas.txt", "r") as f:
     raw_lines = f.read()
 
+# Parse numbers
 numbers = list(map(
     int,
     
