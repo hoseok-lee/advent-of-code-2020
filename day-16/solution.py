@@ -27,7 +27,11 @@ fields = [
 # Your ticket
 # Nearby tickets
 your_ticket, *nearby_tickets = [
-    list(map(int, ticket.split(",")))
+    list(map(
+        int, 
+        
+        ticket.split(",")
+    ))
 
     for ticket in re.findall(
         r"^((?:\d+,?)+)$",
