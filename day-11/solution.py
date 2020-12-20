@@ -9,11 +9,14 @@ from copy import deepcopy
 '''
 
 # Open and parse input text
-f = open("seats.txt", "r")
+with open("bus-time.txt", "r") as f:
+    raw_lines = f.read()
+
+# Split every character into its own cell
 seat_map = np.array([
-    [y for y in x]
+    list(row)
         
-    for x in list(f.read().split("\n"))
+    for row in list(f.read().split("\n"))
 ])
 
 
@@ -56,8 +59,7 @@ while True:
 
             # Count neighbours
             # (I(D) + I(A)) - (I(B) + I(C))
-            adjacency = \
-                (I[y1][x1] + I[y0][x0]) - (I[y0][x1] + I[y1][x0])
+            adjacency = (I[y1][x1] + I[y0][x0]) - (I[y0][x1] + I[y1][x0])
 
             # Account for current seat
             if occupancy_map[y][x] == 1:
