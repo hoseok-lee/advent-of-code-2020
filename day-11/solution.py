@@ -16,7 +16,7 @@ with open("seats.txt", "r") as f:
 seat_map = np.array([
     list(row)
         
-    for row in list(f.read().split("\n"))
+    for row in list(raw_lines.split("\n"))
 ])
 
 
