@@ -7,12 +7,15 @@ __GOAL__ = 2020
 '''
 
 # Open and parse input text
-f = open("numbers.txt", "r")
-numbers = sorted([
-    int(x)
+with open("numbers.txt", "r") as f:
+    raw_lines = f.read()
+
+# Sort all the integers
+numbers = sorted(list(map(
+    int,
     
-    for x in list(f.read().split("\n"))
-])
+    raw_lines.split("\n")
+)))
 
 
 
