@@ -46,6 +46,8 @@ for _ in range(6):
     neighbours = convolve(universe, __KERNEL__, mode="constant")
 
     # Generate a new universe with neighbour constraints
+    # 1 if there are 3 neighbours (regardless of active or inactive)
+    # or there's 4 neighbours and current cube is active
     universe = np.where(
         (universe & (neighbours == 4)) |
         (neighbours == 3), 
