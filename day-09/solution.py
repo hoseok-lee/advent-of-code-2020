@@ -13,12 +13,14 @@ __GENERATION_LENGTH__ = __PREAMBLE_LENGTH__ - 1
 '''
 
 # Open and parse input text
-f = open("xmas.txt", "r")
-numbers = [
-    int(x)
+with open("xmas.txt", "r") as f:
+    raw_lines = f.read()
+
+numbers = list(map(
+    int,
     
-    for x in list(f.read().split("\n"))
-]
+    raw_lines.split("\n")
+))
 
 
 
