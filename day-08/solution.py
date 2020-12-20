@@ -7,11 +7,17 @@ from copy import deepcopy
 '''
 
 # Open and parse input text
-f = open("instructions.txt", "r")
-instructions = [
-    [x.split()[0], int(x.split()[1])]
+with open("instructions.txt", "r") as f:
+    raw_lines = f.read()
 
-    for x in list(f.read().split("\n"))
+# Parse instructions
+instructions = [
+    [
+        x.split()[0], 
+        int(x.split()[1])
+    ]
+
+    for x in raw_lines.split("\n")
 ]
 
 
