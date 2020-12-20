@@ -7,16 +7,16 @@ from functools import reduce
 '''
 
 # Open and parse input text
-with open("bus-time.txt", "r") as f:
+with open("bus-times.txt", "r") as f:
     raw_lines = f.read()
 
 # Split text into time and bus schedule
-current_time = int(raw_lines[0])
-true_bus_times = [
-    int(x) 
+current_time = int(raw_lines.split("\n")[0])
+true_bus_times = list(map(
+    int,
 
-    for x in (raw_lines[1].replace("x", "0")).split(",")
-]
+    (raw_lines.split("\n")[1].replace("x", "0")).split(",")
+))
 
 # Remove all "x" bus times
 # Only necessary for part 1
