@@ -3,12 +3,11 @@
 '''
 
 # Open and parse input text
-f = open("boarding-passes.txt", "r")
-boarding_passes = [
-    x
-        
-    for x in list(f.read().split("\n"))
-]
+with open("boarding-passes.txt", "r") as f:
+    raw_lines = f.read()
+
+# Parse boarding passes
+boarding_passes = raw_lines.split("\n")
 
 
 
