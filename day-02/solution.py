@@ -3,8 +3,11 @@
 '''
 
 # Open and parse input text
-f = open("passwords.txt", "r")
-password_templates = list(f.read().split("\n"))
+with open("passwords.txt", "r") as f:
+    raw_lines = f.read()
+
+# Simply split by new line
+password_templates = raw_lines.split("\n")
 
 
 
