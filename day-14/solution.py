@@ -7,39 +7,28 @@ import itertools
     PROCESS INPUTS
 '''
 
-# Retrieve memory location
-def parse_memory (memory):
-    result = re.search(r"mem\[(.*)\] = (.*)", memory)
-
-    return [int(result.group(1)), int(result.group(2))]
-
-
-
 # Open and parse input text
-f = open("bit-mask.txt", "r")
-raw_programs = [
-    line.split("\n")
-    
-    for line in f.read().split("mask = ")
-]
+with open("bit-mask.txt", "r") as f:
+    raw_lines = f.read()
 
-# List of tuples with all the necessary information of each program
-# AND + OR mask and all relevant memory
-programs = []
-
-# Skip the first index since split creates an empty program
-for raw_program in raw_programs[1:]:
-    programs.append([
-        # Split input into mask and memory
-        raw_program[0],
-
-        # Memory addresses and initial value
+programs = [
+    [
+        mask, 
         [
-            parse_memory(mem)
-
-            for mem in raw_program[1:] if mem != ""
+            [int(address), int(value)]
+            
+            for (address, value) in re.findall(
+                r"mem\[(\d+)\] = (\d+)",
+                memory
+            )
         ]
-    ])
+    ]
+    
+    for (mask, memory) in re.findall(
+        r"mask = ([X10]+)((?:\nmem\[(?:\d+)] = (?:\d+))*)",
+        raw_lines
+    )
+]
 
 
 
@@ -81,7 +70,7 @@ print(sum(memory_bank.values()))
 '''
     PART 2: APPLY BIT MASKS TO MEMORY ADDRESS
 
-    Complexity: O(n)
+    Complexity: O(n * m)
 
     Instead of manually turning on and off every bit and calculating every new
     possible address, the algorithm generates a base address and adds/substracts

@@ -19,7 +19,7 @@ fields = [
     ]
 
     for (name, x0, y0, x1, y1) in re.findall(
-        r"((?:\w+ ?)+): (\d+)-(\d+) or (\d+)-(\d+)",
+        r"((?:\w+ ?)+): (?:(\d+)-(\d+)) or (?:(\d+)-(\d+))",
         raw_lines
     )
 ]
