@@ -46,7 +46,7 @@ for _ in range(6):
     neighbours = convolve(universe, __KERNEL__, mode="constant")
 
     # Generate a new universe with neighbour constraints
-    universe[:] = np.where(
+    universe = np.where(
         (universe & (neighbours == 4)) |
         (neighbours == 3), 
         1, 0
