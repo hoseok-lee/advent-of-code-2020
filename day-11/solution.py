@@ -9,7 +9,7 @@ from copy import deepcopy
 '''
 
 # Open and parse input text
-with open("bus-time.txt", "r") as f:
+with open("seats.txt", "r") as f:
     raw_lines = f.read()
 
 # Split every character into its own cell
