@@ -7,9 +7,15 @@ import numpy as np
 '''
 
 # Open and parse input text
-f = open("directions.txt", "r")
+with open("directions.txt", "r") as f:
+    raw_lines = f.read()
+
+# Split the direction and the value
 directions = [
-    [x[0], int(x[1:])]
+    [
+        x[0], 
+        int(x[1:])
+    ]
         
     for x in list(f.read().split("\n"))
 ]
