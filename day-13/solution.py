@@ -7,15 +7,15 @@ from functools import reduce
 '''
 
 # Open and parse input text
-f = open("bus-times.txt", "r")
-raw_file = f.read().split("\n")
+with open("bus-time.txt", "r") as f:
+    raw_lines = f.read()
 
 # Split text into time and bus schedule
-current_time = int(raw_file[0])
+current_time = int(raw_lines[0])
 true_bus_times = [
     int(x) 
 
-    for x in (raw_file[1].replace("x", "0")).split(",")
+    for x in (raw_lines[1].replace("x", "0")).split(",")
 ]
 
 # Remove all "x" bus times
@@ -41,7 +41,10 @@ stripped_bus_times = [
 '''
 # Calculate the fastest bus
 fastest_bus = min([
-    [bus_time - (current_time % bus_time), bus_time]
+    [
+        bus_time - (current_time % bus_time), 
+        bus_time
+    ]
                     
     for bus_time in stripped_bus_times
 ])
@@ -73,9 +76,13 @@ co_prime_product = reduce(lambda x, y: x * y, stripped_bus_times)
 
 # Bus times with their proposed remainders
 remainder_bus_times = [
-    [(bus_time - bus_index), bus_time]
+    [
+        (bus_time - bus_index), 
+        bus_time
+    ]
 
-    for (bus_index, bus_time) in enumerate(true_bus_times) if bus_time != 0
+    for (bus_index, bus_time) in enumerate(true_bus_times) 
+    if bus_time != 0
 ]
 
 # Calculate using Chinese remainder theorem
