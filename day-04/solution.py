@@ -3,11 +3,14 @@
 '''
 
 # Open and parse input text
-f = open("passports.txt", "r")
+with open("passports.txt", "r") as f:
+    raw_lines = f.read()
+
+# Sort categories to ensure the position of certain categories
 passports = [
     sorted(x.replace("\n", " ").split())
 
-    for x in list(f.read().split("\n\n"))
+    for x in raw_lines.split("\n\n")
 ]
 
 
