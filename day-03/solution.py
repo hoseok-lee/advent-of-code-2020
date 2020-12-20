@@ -8,7 +8,7 @@ __Y_INCREMENT__ = 1
 '''
 
 # Open and parse input text
-with open("maps.txt", "r") as f:
+with open("map.txt", "r") as f:
     raw_lines = f.read()
 
 # Simply split the latitudes by new lines
