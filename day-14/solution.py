@@ -11,6 +11,7 @@ import itertools
 with open("bit-mask.txt", "r") as f:
     raw_lines = f.read()
 
+# Group each mask with the corresponding memory modules
 programs = [
     [
         mask, 
