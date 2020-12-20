@@ -7,7 +7,11 @@ with open("starting-numbers.txt", "r") as f:
     raw_lines = f.read()
 
 # Convert to list of integers
-starting_numbers = list(map(int, raw_lines.split(",")))
+starting_numbers = list(map(
+    int, 
+    
+    raw_lines.split(",")
+))
 
 
 
