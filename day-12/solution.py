@@ -17,7 +17,7 @@ directions = [
         int(x[1:])
     ]
         
-    for x in list(f.read().split("\n"))
+    for x in list(raw_lines.split("\n"))
 ]
 
 
