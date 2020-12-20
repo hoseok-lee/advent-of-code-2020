@@ -8,12 +8,14 @@ from functools import cache
 '''
 
 # Open and parse input text
-f = open("voltages.txt", "r")
-voltages = sorted([
-    int(x) 
+with open("voltages.txt", "r") as f:
+    raw_lines = f.read()
     
-    for x in list(f.read().split("\n"))
-])
+# Sort the voltages as soon as they're read
+voltages = sorted(list(map(
+    int, 
+    raw_lines.split("\n")
+)))
 
 # Add the first and last voltages of 0 and +3
 voltages = np.array([0] + voltages + [(voltages[-1] + 3)])
