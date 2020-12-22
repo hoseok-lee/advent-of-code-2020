@@ -1,8 +1,10 @@
 import numpy as np
-import itertools
+from itertools import product
+from itertools import count
 from copy import deepcopy
 from scipy.ndimage import convolve
 
+# Neighbour checking for 2D matrices
 __KERNEL__ = np.ones([3, 3])
 
 
