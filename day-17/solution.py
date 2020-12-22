@@ -5,7 +5,7 @@ from scipy.ndimage import convolve
 __DIMENSIONS__ = 4
 
 # Neighbour check kernel
-__KERNEL__ = np.ones((3,) * __DIMENSIONS__)
+__KERNEL__ = np.ones([3,] * __DIMENSIONS__)
 
 
 
@@ -18,15 +18,11 @@ with open("initial-state.txt", "r") as f:
     raw_lines = f.read()
 
 # Import universe
-universe = np.array([
-    [
-        int(cell == "#")
-
-        for cell in row
-    ]
+universe = (np.array([
+    list(row)
 
     for row in raw_lines.split("\n")
-])
+]) == "#").astype(int)
 
 
 
@@ -51,6 +47,7 @@ for _ in range(6):
     universe = np.where(
         (universe & (neighbours == 4)) |
         (neighbours == 3), 
+        
         1, 0
     )
 
