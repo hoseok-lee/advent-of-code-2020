@@ -33,7 +33,7 @@ seat_map = np.array([
 '''
 '''
 # To make sure that seats are only placed on valid places
-available = (seat_map == "L")
+available = (seat_map == "L").astype(int)
 
 # The previous and current state of convolution
 current_state = np.zeros(seat_map.shape).astype(bool)
