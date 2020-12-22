@@ -1,6 +1,9 @@
 import numpy as np
 import itertools
 from copy import deepcopy
+from scipy.ndimage import convolve
+
+__KERNEL__ = np.ones([3, 3])
 
 
 
@@ -24,66 +27,37 @@ seat_map = np.array([
 '''
     PART 1: DIRECT NEIGHBOURS ARE ADJACENT
 
-    I was unable to find any optimizations to this problem besides using a 
-    summed-area table to calculate the amount of adjacent neighbours. This 
-    algorithm also avoids using deepcopy.
+    The algorithm uses convolution to generate a matrix of nearest neighbours
+    for every cell. It simply brute-force iterates through until no change is
+    made from one pass to the next.
 '''
 '''
-# Gather seat map size
-height, width = seat_map.shape
+# To make sure that seats are only placed on valid places
+available = (seat_map == "L")
 
-# Generate occupancy map
-occupancy_map = np.zeros((height, width), dtype=int)
+# The previous and current state of convolution
+current_state = np.zeros(seat_map.shape).astype(bool)
+previous_state = None
 
-# Count the number of changes
-curr_changes = 0
-prev_changes = -1
+# Generate seats until no changes are created
+while not np.array_equal(previous_state, current_state):
+    # Pass on state at beginning since it's a while loop
+    previous_state = deepcopy(current_state)
 
-while True:
-    # Calculate cumulative sum
-    I = np.zeros((height + 1, width + 1), dtype=int)
-    # Pad with zeros to account for seats along top and left edge
-    I[1:(height + 1), 1:(width + 1)] = \
-        occupancy_map.cumsum(axis=0).cumsum(axis=1)
+    # Convolve with neighbour kernel
+    neighbours = convolve(previous_state, __KERNEL__, mode="constant")
 
-    # Iterate through seat map
-    for (y, row) in enumerate(seat_map):
-        for (x, cell) in enumerate(row):
-            # Skip floor tiles
-            if cell == ".":
-                continue
+    # Can only place seats where seats exist
+    current_state = np.where(
+        available & (
+            (previous_state & (neighbours < 5)) |
+            (neighbours == 0)
+        ),
 
-            # Gather bounds
-            x0, y0 = max(0, (x - 1)), max(0, (y - 1))
-            x1, y1 = min(width, (x + 2)), min(height, (y + 2))
+        1, 0
+    )
 
-            # Count neighbours
-            # (I(D) + I(A)) - (I(B) + I(C))
-            adjacency = (I[y1][x1] + I[y0][x0]) - (I[y0][x1] + I[y1][x0])
-
-            # Account for current seat
-            if occupancy_map[y][x] == 1:
-                adjacency -= 1
-
-            # No seats nearby
-            if adjacency == 0:
-                occupancy_map[y][x] = 1
-                curr_changes += 1
-
-            # More than 4 seats nearby
-            if adjacency >= 4:
-                occupancy_map[y][x] = 0
-                curr_changes += 1
-
-    # Exit when you detect no change
-    if prev_changes == curr_changes:
-        break
-
-    # Iterate through the changes
-    prev_changes = curr_changes
-    curr_changes = 0
-
-print(np.sum(occupancy_map))
+print(np.sum(current_state))
 '''
 
 
