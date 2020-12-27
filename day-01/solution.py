@@ -1,4 +1,4 @@
-__GOAL__ = 2020
+import math
 
 
 
@@ -11,11 +11,11 @@ with open("numbers.txt", "r") as f:
     raw_lines = f.read()
 
 # Sort all the integers
-numbers = sorted(list(map(
+numbers = list(map(
     int,
     
     raw_lines.split("\n")
-)))
+))
 
 
 
@@ -23,28 +23,29 @@ numbers = sorted(list(map(
     PART ONE: PERFORM TWO-SUM
 
     Complexity: O(n)
+
+    This optimized two-sum algorithm uses hash-tables and constant-time look-up
+    to find two numbers that sum to the target.
 '''
+
+def two_sum (numbers, target):
+    # Keep a hash table of observed numbers
+    checked_numbers = {}
+
+    for number in numbers:
+        complement = target - number
+
+        # Check if the complement is part of the list
+        if complement in checked_numbers:
+            return [number, complement]
+
+        checked_numbers[number] = number
+
+    return None
+
+
 '''
-# Keep track of margins
-left = 0
-right = len(numbers) - 1
-
-# While no intersection
-while left < right:
-    current_sum = numbers[left] + numbers[right]
-
-    # Too high
-    if current_sum > __GOAL__:
-        right -= 1
-
-    # Too low
-    elif current_sum < __GOAL__:
-        left += 1
-
-    # Found number
-    else:
-        print(numbers[left] * numbers[right])
-        break
+print(math.prod(two_sum(numbers, 2020)))
 '''
 
 
@@ -57,31 +58,11 @@ while left < right:
     the three-sum algorithm require a lot more work for little performance gain. 
 '''
 
-# Only keep track of one margin at first
-left = 0
+for idx, number in enumerate(numbers):
+    result = two_sum(numbers[:idx] + numbers[(idx + 1):], 2020 - number)
 
-# While the left is 3 numbers from the end
-while left < (len(numbers) - 2):
-    # Start from the left since it will only increase
-    # No need to check any number less than left
-    middle = left
-    right = len(numbers) - 1
+    # If a three-sum has been found
+    if result:
+        print(math.prod([number] + result))
 
-    # While no intersection
-    while middle < right:
-        current_sum = numbers[left] + numbers[middle] + numbers[right]
-
-        # Too high
-        if current_sum > __GOAL__:
-            right -= 1
-
-        # Too low
-        elif current_sum < __GOAL__:
-            middle += 1
-
-        # Found number
-        else:
-            print(numbers[left] * numbers[middle] * numbers[right])
-            break
-
-    left += 1
+        break
