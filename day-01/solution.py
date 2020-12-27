@@ -10,7 +10,7 @@ import math
 with open("numbers.txt", "r") as f:
     raw_lines = f.read()
 
-# Sort all the integers
+# Convert to integers
 numbers = list(map(
     int,
     
