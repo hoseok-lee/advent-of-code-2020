@@ -4,6 +4,10 @@ import warnings
 
 
 
+'''
+    PROCESS INPUTS
+'''
+
 # Suppress runtime warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 warnings.simplefilter(action='ignore', category=np.VisibleDeprecationWarning)
@@ -75,7 +79,7 @@ def parse (w, to_parse):
             for unchecked in rules
         )
 
-        
+
 '''
 print(sum([
     parse(w, [0])
