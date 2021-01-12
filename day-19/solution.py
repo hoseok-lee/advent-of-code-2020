@@ -74,6 +74,8 @@ def parse (w, to_parse):
             
             for unchecked in rules
         )
+
+        
 '''
 print(sum([
     parse(w, [0])
